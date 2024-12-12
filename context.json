@@ -1,0 +1,18 @@
+{
+    "deviceType": "Desktop",
+    "timezone": "Europe/Paris",
+    "language": "fr-FR",
+    "dayOfWeek": "Sunday",
+    "year": 2024,
+    "month": 11,
+    "day": 24,
+    "weekOfMonth": 4,
+    "screenResolution": "1920x1080",
+    "connectionType": "4g",
+    "weather": {
+      "temperature": 15,
+      "condition": "clear sky",
+      "city": "Paris"
+    }
+  }
+  

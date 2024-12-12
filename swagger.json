@@ -1,0 +1,54 @@
+{
+    "swagger": "2.0",
+    "info": {
+      "version": "1.0.0",
+      "title": "Context API",
+      "description": "API for providing contextual data based on timestamp."
+    },
+    "paths": {
+      "/api/context": {
+        "get": {
+          "summary": "Get context data",
+          "parameters": [
+            {
+              "name": "timestamp",
+              "in": "query",
+              "required": false,
+              "type": "string",
+              "description": "Timestamp in UNIX format (optional, defaults to current time)."
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Successful response",
+              "schema": {
+                "$ref": "#/definitions/Context"
+              }
+            }
+          }
+        }
+      }
+    },
+    "definitions": {
+      "Context": {
+        "type": "object",
+        "properties": {
+          "timestamp": { "type": "string" },
+          "year": { "type": "integer" },
+          "month": { "type": "integer" },
+          "day": { "type": "integer" },
+          "weekOfMonth": { "type": "integer" },
+          "dayOfWeek": { "type": "string" },
+          "weather": {
+            "type": "object",
+            "properties": {
+              "temperature": { "type": "integer" },
+              "condition": { "type": "string" },
+              "city": { "type": "string" }
+            }
+          }
+        }
+      }
+    }
+  }
+  
