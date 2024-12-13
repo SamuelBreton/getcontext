@@ -3,21 +3,23 @@ const cache = new NodeCache({ stdTTL: 60 }); // Cache pour 60 secondes
 
 const { isPublicHoliday } = require("../utils/holidays");
 const { getSpecialEvent } = require("../utils/events");
-const { getMomentOfDay } = require("../utils/time");
+const { getMomentOfDay, isBusinessHour } = require("../utils/time");
 
-function generateContext(timestamp, userAgent) {
+function generateContext(timestamp, userAgent, bypassCache) {
   // Vérifier si le cache contient déjà les données
   const cacheKey = timestamp || "now";
-  const cachedData = cache.get(cacheKey);
-  if (cachedData) {
-    return cachedData;
+  if (!bypassCache) {
+    const cachedData = cache.get(cacheKey);
+    if (cachedData) {
+      return cachedData;
+    }
   }
 
   const date = timestamp ? new Date(parseInt(timestamp, 10)) : new Date();
   if (isNaN(date.getTime())) {
     return { error: "Invalid timestamp format. Provide a valid UNIX timestamp." };
   }
-
+ 
   const year = date.getFullYear();
   const month = date.getMonth() + 1;
   const day = date.getDate();
@@ -44,12 +46,14 @@ function generateContext(timestamp, userAgent) {
     utcOffset: date.getTimezoneOffset(),
     userAgent,
     weekOfYear: Math.ceil(((date - new Date(date.getFullYear(), 0, 1)) / 86400000 + new Date(date.getFullYear(), 0, 1).getDay() + 1) / 7),
-    quarter: Math.ceil((month) / 3)
+    quarter: Math.ceil((month) / 3),
+    businessHour: isBusinessHour(date)
   };
 
-  // Stocker les données dans le cache
-  cache.set(cacheKey, contextData);
-
+    // Cache Management
+  if (!bypassCache) {
+    cache.set(cacheKey, contextData);
+  }
   return contextData;
 }
 
