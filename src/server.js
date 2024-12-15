@@ -6,6 +6,6 @@ const app = require("./app");
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
-  console.log(`API disponible sur http://localhost:${PORT}/v1/api/context`);
+  console.log(`API disponible sur http://localhost:${PORT}/v1/context`);
 });
 

@@ -12,6 +12,6 @@ app.use(compression());
 app.use(cors());
 
 // Ajout des routes
-app.use("/v1/api", contextRoutes);
+app.use("/v1", contextRoutes);
 
 module.exports = app;
