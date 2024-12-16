@@ -86,7 +86,7 @@
       const performanceMetrics = getPerformanceMetrics();
   
       const contextData = {
-        event: "context_data", // Nom de l'événement
+        event: "context_ready", // Nom de l'événement
         context: {
           date: date.toISOString().split("T")[0], // Date au format AAAA-MM-JJ
           time: date.toTimeString().split(" ")[0], // Heure au format HH:MM:SS

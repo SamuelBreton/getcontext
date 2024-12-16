@@ -43,7 +43,7 @@
   
         if (contextData) {
           const eventData = {
-            event: "context_data",
+            event: "context_ready",
             context: contextData
           };
   
