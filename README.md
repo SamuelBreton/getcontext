@@ -48,7 +48,7 @@ Context is an application designed to enrich your events with contextual data. I
 ### Base URL
 
 ```
-https://getcontext.onrender.com/v1/api
+https://api.getcontext.dev/v1/api/context
 ```
 
 ### Endpoints
@@ -62,7 +62,7 @@ Retrieve contextual data for a specific timestamp or real-time data.
 
 - **Example Request:**
   ```bash
-  curl "https://getcontext.onrender.com/v1/api/context?timestamp=1672531200000&bypassCache=true"
+  curl "https://api.getcontext.dev/v1/api/context?timestamp=1672531200000&bypassCache=true"
   ```
 
 - **Example Response:**
