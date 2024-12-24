@@ -44,7 +44,6 @@ function generateContext(timestamp, userAgent, bypassCache) {
     specialEvent: getSpecialEvent(date),
     timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
     utcOffset: date.getTimezoneOffset(),
-    userAgent,
     weekOfYear: Math.ceil(((date - new Date(date.getFullYear(), 0, 1)) / 86400000 + new Date(date.getFullYear(), 0, 1).getDay() + 1) / 7),
     quarter: Math.ceil((month) / 3),
     businessHour: isBusinessHour(date)
