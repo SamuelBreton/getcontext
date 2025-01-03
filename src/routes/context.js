@@ -1,4 +1,3 @@
-console.log(__dirname);
 const express = require("express");
 const { generateContext } = require("../controllers/contextController");
 const router = express.Router();

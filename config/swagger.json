@@ -6,7 +6,7 @@
       "description": "API for providing contextual data based on timestamp."
     },
     "paths": {
-      "/api/context": {
+      "/v1/context": {
         "get": {
           "summary": "Get context data",
           "parameters": [

@@ -3,7 +3,7 @@
     window.dataLayer = window.dataLayer || [];
   
     // URL de l'API pour récupérer les données de contexte
-    const API_BASE_URL = "https://getcontext.onrender.com/api/context";
+    const API_BASE_URL = "https://api.getcontext.dev/v1/context";
   
     // Création de l'objet contextManager
     const contextManager = {
@@ -28,6 +28,7 @@
             return null;
           }
   
+      
           // Stocker les données dans le cache local
           this.contextData = await response.json();
           return this.contextData;

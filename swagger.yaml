@@ -1,0 +1,20 @@
+openapi: "3.0.0"
+info:
+  title: "API de Contexte Temporel"
+  version: "1.0.0"
+  description: "API fournissant des informations détaillées sur le contexte temporel"
+servers:
+  - url: "/v1"
+    description: "Serveur API"
+paths:
+  /context:
+    get:
+      tags:
+        - Context
+      summary: "Obtenir le contexte temporel"
+      responses:
+        '200':
+          description: "Succès"
+tags:
+  - name: Context
+    description: "Endpoints liés au contexte temporel" 

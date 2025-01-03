@@ -15,9 +15,18 @@ function generateContext(timestamp, userAgent, bypassCache) {
     }
   }
 
-  const date = timestamp ? new Date(parseInt(timestamp, 10)) : new Date();
+  // Amélioration de la gestion du timestamp
+  let date;
+  if (timestamp) {
+    // Gestion des différents formats de timestamp
+    const timestampNumber = typeof timestamp === 'string' ? parseInt(timestamp, 10) : timestamp;
+    date = new Date(timestampNumber);
+  } else {
+    date = new Date();
+  }
+
   if (isNaN(date.getTime())) {
-    return { error: "Invalid timestamp format. Provide a valid UNIX timestamp." };
+    return { error: "Invalid timestamp format. Provide a valid UNIX timestamp in milliseconds." };
   }
  
   const year = date.getFullYear();
@@ -30,6 +39,13 @@ function generateContext(timestamp, userAgent, bypassCache) {
     date: date.toISOString().split("T")[0],
     time: date.toTimeString().split(" ")[0],
     timestamp: date.getTime(),
+    timestampSeconds: Math.floor(date.getTime() / 1000),
+    completeDay: date.toLocaleDateString('en-US', {
+      weekday: 'long',
+      day: 'numeric',
+      month: 'long',
+      year: 'numeric'
+    }),
     year,
     month,
     day,
