@@ -12,6 +12,13 @@ paths:
       tags:
         - Context
       summary: "Obtenir le contexte temporel"
+      parameters:
+        - name: timestamp
+          in: query
+          description: "Timestamp UNIX (optionnel, valeur par défaut = heure actuelle)"
+          required: false
+          schema:
+            type: string
       responses:
         '200':
           description: "Succès"

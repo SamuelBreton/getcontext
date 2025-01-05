@@ -20,13 +20,14 @@ function generateContext(timestamp, userAgent, bypassCache) {
   if (timestamp) {
     // Gestion des différents formats de timestamp
     const timestampNumber = typeof timestamp === 'string' ? parseInt(timestamp, 10) : timestamp;
-    date = new Date(timestampNumber);
+    // Conversion du timestamp (secondes) en millisecondes pour le constructeur Date
+    date = new Date(timestampNumber * 1000);
   } else {
     date = new Date();
   }
 
   if (isNaN(date.getTime())) {
-    return { error: "Invalid timestamp format. Provide a valid UNIX timestamp in milliseconds." };
+    return { error: "Invalid timestamp format. Provide a valid UNIX timestamp in seconds." };
   }
  
   const year = date.getFullYear();
@@ -38,8 +39,7 @@ function generateContext(timestamp, userAgent, bypassCache) {
   const contextData = {
     date: date.toISOString().split("T")[0],
     time: date.toTimeString().split(" ")[0],
-    timestamp: date.getTime(),
-    timestampSeconds: Math.floor(date.getTime() / 1000),
+    timestamp: Math.floor(date.getTime() / 1000),
     completeDay: date.toLocaleDateString('en-US', {
       weekday: 'long',
       day: 'numeric',
