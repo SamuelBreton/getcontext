@@ -18,7 +18,7 @@ const specialEvents = [
     { date: "2025-11-11", label: "Armistice Day" },
     { date: "2025-12-25", label: "Christmas" },
     { date: "2025-12-26", label: "St. Stephen's Day" },
-    { date: "2025-12-31", label: "New Year's Eve" }
+    { date: "2026-01-01", label: "New Year's Eve" }
   ];
 
   function getSpecialEvent(date) {
