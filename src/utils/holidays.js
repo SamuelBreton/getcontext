@@ -6,10 +6,14 @@ const publicHolidays = [
 
 // Structure pour les périodes de vacances
 const holidayPeriods = [
-  { start: "2024-02-01", end: "2024-02-15" }, // Vacances de février
-  { start: "2024-04-01", end: "2024-04-15" }, // Vacances de Pâques
-  { start: "2024-07-06", end: "2024-09-02" }, // Vacances d'été
-  { start: "2024-12-21", end: "2025-01-06" }  // Vacances de Noël
+  { start: "2024-02-01", end: "2024-02-15" }, // Vacances de février 2024
+  { start: "2024-04-01", end: "2024-04-15" }, // Vacances de Pâques 2024
+  { start: "2024-07-06", end: "2024-09-02" }, // Vacances d'été 2024
+  { start: "2024-12-21", end: "2025-01-06" }, // Vacances de Noël 2024
+  { start: "2025-02-15", end: "2025-03-03" }, // Vacances de février 2025
+  { start: "2025-04-19", end: "2025-05-05" }, // Vacances de Pâques 2025
+  { start: "2025-07-05", end: "2025-09-01" }, // Vacances d'été 2025
+  { start: "2025-12-20", end: "2026-01-05" }  // Vacances de Noël 2025
 ];
 
 function isWithinPeriod(date, start, end) {
