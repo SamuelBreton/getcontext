@@ -62,32 +62,67 @@ Retrieve contextual data for a specific timestamp or real-time data.
 
 - **Example Request:**
   ```bash
-  curl "https://api.getcontext.dev/v1/api/context?timestamp=1672531200000&bypassCache=true"
+  curl "https://api.getcontext.dev/v1/api/context?timestamp=1736977012000&bypassCache=true"
   ```
 
 - **Example Response:**
   ```json
   {
-    "date": "2024-01-01",
-    "time": "10:00:00",
-    "timestamp": 1672531200000,
-    "year": 2024,
+    "date": "2025-01-15",
+    "time": "22:36:52",
+    "timestamp": 1736977012,
+    "completeDay": "Wednesday, January 15, 2025",
+    "year": 2025,
     "month": 1,
-    "day": 1,
-    "hour": 10,
-    "weekOfMonth": 1,
-    "dayOfWeek": "Monday",
-    "momentOfDay": "morning",
+    "day": 15,
+    "hour": 22,
+    "weekOfMonth": 3,
+    "dayOfWeek": "Wednesday", 
+    "momentOfDay": "night",
     "season": "winter",
-    "isHoliday": "yes",
-    "specialEvent": "New Year",
+    "isHoliday": "no",
+    "specialEvent": "none",
     "timezone": "Europe/Paris",
     "utcOffset": -60,
-    "userAgent": "Mozilla/5.0",
-    "weekOfYear": 1,
-    "quarter": 1
+    "weekOfYear": 3,
+    "quarter": 1,
+    "businessHour": false,
+    "remainingDaysInYear": 350,
+    "isLeapYear": false,
+    "isWorkingDay": true,
+    "isWeekend": false,
+    "isSchoolDay": true
   }
   ```
+
+#### Response Fields Description
+
+| Field | Type | Description |
+|-------|------|-------------|
+| date | string | Date in YYYY-MM-DD format |
+| time | string | Time in HH:mm:ss format |
+| timestamp | number | UNIX timestamp |
+| completeDay | string | Full date in human readable format |
+| year | number | Current year |
+| month | number | Current month (1-12) |
+| day | number | Day of the month (1-31) |
+| hour | number | Hour of the day (0-23) |
+| weekOfMonth | number | Current week of the month |
+| dayOfWeek | string | Day name (Monday-Sunday) |
+| momentOfDay | string | Period of day (morning/afternoon/evening/night) |
+| season | string | Current season |
+| isHoliday | string | "yes" if holiday, "no" if not |
+| specialEvent | string | Name of special event or "none" |
+| timezone | string | Timezone identifier |
+| utcOffset | number | Offset from UTC in minutes |
+| weekOfYear | number | Current week of the year (1-52) |
+| quarter | number | Current quarter (1-4) |
+| businessHour | boolean | Whether current time is during business hours |
+| remainingDaysInYear | number | Days remaining in current year |
+| isLeapYear | boolean | Whether current year is a leap year |
+| isWorkingDay | boolean | Whether current day is a working day |
+| isWeekend | boolean | Whether current day is a weekend |
+| isSchoolDay | boolean | Whether current day is a school day |
 
 ---
 
