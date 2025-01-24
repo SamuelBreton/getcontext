@@ -1,6 +1,6 @@
 openapi: "3.0.0"
 info:
-  title: "**Temporal Context API**"
+  title: "Temporal Context API"
   version: "1.0.0"
   description: "**API providing detailed information on temporal context**"
 servers:
