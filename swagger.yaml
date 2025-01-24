@@ -1,8 +1,8 @@
 openapi: "3.0.0"
 info:
-  title: "API de Contexte Temporel"
+  title: "**Temporal Context API**"
   version: "1.0.0"
-  description: "API fournissant des informations détaillées sur le contexte temporel"
+  description: "**API providing detailed information on temporal context**"
 servers:
   - url: "/v1"
     description: "Serveur API"
@@ -11,17 +11,18 @@ paths:
     get:
       tags:
         - Context
-      summary: "Obtenir le contexte temporel"
+      summary: "Get temporal context"
+      description: "Returns the temporal context for a given timestamp or the current time if no timestamp is provided."
       parameters:
         - name: timestamp
           in: query
-          description: "Timestamp UNIX (optionnel, valeur par défaut = heure actuelle)"
+          description: "UNIX timestamp (optional, default = current time)"
           required: false
           schema:
             type: string
       responses:
         '200':
-          description: "Succès"
+          description: "Success"
 tags:
   - name: Context
-    description: "Endpoints liés au contexte temporel" 
+    description: "Temporal context related endpoints" 
