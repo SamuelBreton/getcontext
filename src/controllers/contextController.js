@@ -39,8 +39,8 @@ function generateContext(timestamp, userAgent, bypassCache) {
   }
  
   const year = date.getFullYear();
-  const month = date.getMonth() + 1;
-  const day = date.getDate();
+  const month = String(date.getMonth() + 1).padStart(2, '0');
+  const day = String(date.getDate()).padStart(2, '0');
   const hour = date.getHours();
   const weekOfMonth = Math.ceil((day + new Date(year, month - 1, 1).getDay()) / 7);
 
