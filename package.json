@@ -5,7 +5,8 @@
   "main": "server.js",
   "scripts": {
     "start": "node src/server.js",
-    "dev": "nodemon --inspect --verbose src/server.js"
+    "dev": "nodemon --inspect --verbose src/server.js", 
+    "minify": "terser cdn/context.js  --compress sequences=true,dead_code=true,conditionals=true,booleans=true --mangle --output cdn/context.min.js"
   },
   "keywords": [],
   "author": "",
@@ -21,6 +22,7 @@
     "yamljs": "^0.3.0"
   },
   "devDependencies": {
-    "nodemon": "^3.0.1"
+    "nodemon": "^3.0.1",
+    "terser": "^5.38.1"
   }
 }
