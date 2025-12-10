@@ -5,24 +5,34 @@
   "main": "server.js",
   "scripts": {
     "start": "node src/server.js",
-    "dev": "nodemon --inspect --verbose src/server.js", 
-    "minify": "terser cdn/context.js  --compress sequences=true,dead_code=true,conditionals=true,booleans=true --mangle --output cdn/context.min.js"
+    "dev": "nodemon --inspect --verbose src/server.js",
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "test:coverage": "jest --coverage",
+    "lint": "eslint src/",
+    "lint:fix": "eslint src/ --fix",
+    "minify": "terser cdn/context.js --compress sequences=true,dead_code=true,conditionals=true,booleans=true --mangle --output cdn/context.min.js"
   },
-  "keywords": [],
+  "keywords": ["context", "temporal", "api", "analytics"],
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "compression": "^1.7.5",
+    "compression": "^1.8.1",
     "cors": "^2.8.5",
-    "express": "^4.18.2",
+    "dotenv": "^16.4.5",
+    "express": "^4.22.1",
+    "express-rate-limit": "^7.4.1",
+    "express-validator": "^7.2.0",
     "module-alias": "^2.2.3",
     "node-cache": "^5.1.2",
     "swagger-jsdoc": "^6.2.8",
     "swagger-ui-express": "^5.0.1",
+    "winston": "^3.15.0",
     "yamljs": "^0.3.0"
   },
   "devDependencies": {
-    "nodemon": "^3.0.1",
-    "terser": "^5.38.1"
+    "jest": "^29.7.0",
+    "nodemon": "^3.1.11",
+    "terser": "^5.44.1"
   }
 }

@@ -1,8 +1,13 @@
-const app = require("./app");
+// Charger dotenv en premier avant tout autre import
+require('dotenv').config();
 
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
-  console.log(`Serveur démarré sur http://localhost:${PORT}/v1/context`);
-  console.log(`Documentation Swagger disponible sur http://localhost:${PORT}/api-docs`);
+const app = require("./app");
+const { port } = require("./config/env");
+const logger = require("./utils/logger");
+
+app.listen(port, () => {
+  logger.info(`Serveur démarré sur http://localhost:${port}/v1/context`);
+  logger.info(`Documentation Swagger disponible sur http://localhost:${port}/api-docs`);
+  logger.info(`Health check disponible sur http://localhost:${port}/health`);
 });
 

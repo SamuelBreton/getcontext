@@ -2,7 +2,14 @@ openapi: "3.0.0"
 info:
   title: "Temporal Context API"
   version: "1.0.0"
-  description: "**API providing detailed information on temporal context**"
+  description: |
+    **API providing detailed information on temporal context**
+    
+    Cette API permet de récupérer des informations contextuelles temporelles pour enrichir vos événements et analyses.
+  contact:
+    email: breton.samuel@gmail.com
+  license:
+    name: MIT
 servers:
   - url: "/v1"
     description: "Serveur API"
@@ -12,17 +19,206 @@ paths:
       tags:
         - Context
       summary: "Get temporal context"
-      description: "Returns the temporal context for a given timestamp or the current time if no timestamp is provided."
+      description: |
+        Returns the temporal context for a given timestamp or the current time if no timestamp is provided.
+        
+        Les données sont mises en cache pendant 60 secondes par défaut pour améliorer les performances.
       parameters:
         - name: timestamp
           in: query
-          description: "UNIX timestamp (optional, default = current time)"
+          description: "UNIX timestamp en secondes (optionnel, défaut = temps actuel)"
           required: false
           schema:
-            type: string
+            type: integer
+            example: 1736977012
+        - name: bypassCache
+          in: query
+          description: "Contourner le cache pour obtenir des données fraîches (true/false)"
+          required: false
+          schema:
+            type: boolean
+            default: false
+            example: false
       responses:
         '200':
-          description: "Success"
+          description: "Succès - Retourne les données contextuelles"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ContextResponse'
+              example:
+                date: "2025-01-15"
+                time: "22:36:52"
+                timestamp: 1736977012
+                completeDay: "Wednesday, January 15, 2025"
+                year: 2025
+                month: 1
+                day: 15
+                hour: 22
+                weekOfMonth: 3
+                dayOfWeek: "Wednesday"
+                momentOfDay: "night"
+                season: "winter"
+                isHoliday: "no"
+                specialEvent: "none"
+                timezone: "Europe/Paris"
+                utcOffset: -60
+                weekOfYear: 3
+                quarter: 1
+                businessHour: false
+                remainingDaysInYear: 350
+                isLeapYear: false
+                isWorkingDay: true
+                isWeekend: false
+                isSchoolDay: true
+        '400':
+          description: "Erreur de validation - Format de timestamp invalide"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error: "Validation Error"
+                errors:
+                  - msg: "Timestamp must be a positive integer (UNIX timestamp in seconds)"
+                    param: "timestamp"
+                    location: "query"
+        '429':
+          description: "Trop de requêtes - Limite de taux dépassée"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error: "Too many requests"
+                message: "Trop de requêtes depuis cette IP, veuillez réessayer plus tard."
+        '500':
+          description: "Erreur serveur interne"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+components:
+  schemas:
+    ContextResponse:
+      type: object
+      properties:
+        date:
+          type: string
+          format: date
+          description: "Date au format YYYY-MM-DD"
+          example: "2025-01-15"
+        time:
+          type: string
+          description: "Heure au format HH:mm:ss"
+          example: "22:36:52"
+        timestamp:
+          type: integer
+          description: "UNIX timestamp en secondes"
+          example: 1736977012
+        completeDay:
+          type: string
+          description: "Date complète en format lisible"
+          example: "Wednesday, January 15, 2025"
+        year:
+          type: integer
+          description: "Année"
+          example: 2025
+        month:
+          type: integer
+          description: "Mois (1-12)"
+          example: 1
+        day:
+          type: integer
+          description: "Jour du mois (1-31)"
+          example: 15
+        hour:
+          type: integer
+          description: "Heure (0-23)"
+          example: 22
+        weekOfMonth:
+          type: integer
+          description: "Semaine du mois"
+          example: 3
+        dayOfWeek:
+          type: string
+          description: "Jour de la semaine"
+          example: "Wednesday"
+        momentOfDay:
+          type: string
+          enum: [morning, noon, afternoon, evening, night]
+          description: "Moment de la journée"
+          example: "night"
+        season:
+          type: string
+          enum: [spring, summer, autumn, winter]
+          description: "Saison"
+          example: "winter"
+        isHoliday:
+          type: string
+          enum: [yes, no]
+          description: "Indique si c'est un jour férié"
+          example: "no"
+        specialEvent:
+          type: string
+          description: "Nom de l'événement spécial ou 'none'"
+          example: "none"
+        timezone:
+          type: string
+          description: "Identifiant de timezone"
+          example: "Europe/Paris"
+        utcOffset:
+          type: integer
+          description: "Décalage UTC en minutes"
+          example: -60
+        weekOfYear:
+          type: integer
+          description: "Semaine de l'année (1-52)"
+          example: 3
+        quarter:
+          type: integer
+          description: "Trimestre (1-4)"
+          example: 1
+        businessHour:
+          type: boolean
+          description: "Indique si c'est une heure de bureau"
+          example: false
+        remainingDaysInYear:
+          type: integer
+          description: "Jours restants dans l'année"
+          example: 350
+        isLeapYear:
+          type: boolean
+          description: "Indique si c'est une année bissextile"
+          example: false
+        isWorkingDay:
+          type: boolean
+          description: "Indique si c'est un jour ouvrable"
+          example: true
+        isWeekend:
+          type: boolean
+          description: "Indique si c'est un weekend"
+          example: false
+        isSchoolDay:
+          type: boolean
+          description: "Indique si c'est un jour d'école"
+          example: true
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          type: string
+          description: "Type d'erreur"
+          example: "Validation Error"
+        message:
+          type: string
+          description: "Message d'erreur"
+          example: "Invalid timestamp format"
+        errors:
+          type: array
+          description: "Détails des erreurs de validation"
+          items:
+            type: object
 tags:
   - name: Context
-    description: "Temporal context related endpoints" 
+    description: "Endpoints liés au contexte temporel" 
