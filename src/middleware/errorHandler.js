@@ -45,6 +45,9 @@ const errorHandler = (err, req, res, next) => {
 
 // Middleware pour gérer les routes non trouvées
 const notFoundHandler = (req, res, next) => {
+  if (req.path === '/favicon.ico') {
+    return res.status(204).end();
+  }
   const error = new Error(`Route not found - ${req.originalUrl}`);
   error.status = 404;
   next(error);
